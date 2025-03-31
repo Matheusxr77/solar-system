@@ -8,8 +8,8 @@ from pyassimp.postprocess import (
     aiProcess_FlipUVs,
     aiProcess_CalcTangentSpace,
 )
-from mesh import Mesh
-from utils import load_texture
+from asserts.mesh import Mesh
+from asserts.utils import load_texture
 
 logging.basicConfig(level=logging.INFO)
 

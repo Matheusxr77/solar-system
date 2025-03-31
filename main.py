@@ -2,10 +2,9 @@
 import glfw
 from OpenGL.GL import *
 import glm
-import time
-from camera import Camera
-from shader import Shader
-from model import Model
+from asserts.camera import Camera
+from asserts.shader import Shader
+from asserts.model import Model
 
 # Configurações da tela
 WIDTH, HEIGHT = 1200, 800
@@ -88,26 +87,26 @@ def main():
     glEnable(GL_DEPTH_TEST)
 
     # Carrega shaders
-    planetas_shader = Shader("shaders/model_loading.vert", "shaders/model_loading.frag")
-    cor_shader      = Shader("shaders/model_loading.vert", "shaders/color.frag")
-    light_shader    = Shader("shaders/lightSun.vert", "shaders/lightSun.frag")
+    planetas_shader = Shader("asserts/shaders/model_loading.vert", "asserts/shaders/model_loading.frag")
+    cor_shader      = Shader("asserts/shaders/model_loading.vert", "asserts/shaders/color.frag")
+    light_shader    = Shader("asserts/shaders/lightSun.vert", "asserts/shaders/lightSun.frag")
 
     # Carrega modelos
-    Sun      = Model("models/Sun/Sun.obj")
-    Mercury  = Model("models/Mercury/Mercury.obj")
-    Venus    = Model("models/Venus/Venus.obj")
-    Earth    = Model("models/Earth/Earth.obj")
-    Moon     = Model("models/Moon/Moon.obj")
-    Mars     = Model("models/Mars/Mars.obj")
-    Jupiter  = Model("models/Jupiter/Jupiter.obj")
-    Saturn   = Model("models/Saturn/Saturn.obj")
-    Uranus   = Model("models/Uranus/Uranus.obj")
-    Neptune  = Model("models/Neptune/Neptune.obj")
+    Sun      = Model("asserts/models/Sun/Sun.obj")
+    Mercury  = Model("asserts/models/Mercury/Mercury.obj")
+    Venus    = Model("asserts/models/Venus/Venus.obj")
+    Earth    = Model("asserts/models/Earth/Earth.obj")
+    Moon     = Model("asserts/models/Moon/Moon.obj")
+    Mars     = Model("asserts/models/Mars/Mars.obj")
+    Jupiter  = Model("asserts/models/Jupiter/Jupiter.obj")
+    Saturn   = Model("asserts/models/Saturn/Saturn.obj")
+    Uranus   = Model("asserts/models/Uranus/Uranus.obj")
+    Neptune  = Model("asserts/models/Neptune/Neptune.obj")
 
-    Background = Model("models/Background/Background.obj")
-    Orbita     = Model("models/Line/Line.obj")
-    Orbita2    = Model("models/Line2/Line2.obj")
-    Orbita3    = Model("models/Line3/Line3.obj")
+    Background = Model("asserts/models/Background/Background.obj")
+    Orbita     = Model("asserts/models/Line/Line.obj")
+    Orbita2    = Model("asserts/models/Line2/Line2.obj")
+    Orbita3    = Model("asserts/models/Line3/Line3.obj")
 
     # Loop principal
     while not glfw.window_should_close(window):

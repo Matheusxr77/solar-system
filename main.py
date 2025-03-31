@@ -205,7 +205,12 @@ def main():
         moon2 = jupiter
         moon3 = jupiter
         moon4 = jupiter
+        moon5 = jupiter
+        moon6 = jupiter
+        moon7 = jupiter
+        moon8 = jupiter
 
+        # Luas de Júpiter
         jupiter = glm.scale(jupiter, glm.vec3(0.1,0.1,0.1))
         jupiter = glm.rotate(jupiter, tempo/4, glm.vec3(0,1,0))
         jupiter = glm.translate(jupiter, glm.vec3(-40,0,10))
@@ -234,6 +239,30 @@ def main():
         moon4 = glm.rotate(moon4, tempo/4, glm.vec3(0,1,0))
         moon4 = glm.translate(moon4, glm.vec3(-40, -15, 10))
         light_shader.set_mat4("model", moon4)
+        Moon.draw(light_shader)
+
+        moon5 = glm.scale(moon5, glm.vec3(0.1,0.1,0.1))
+        moon5 = glm.rotate(moon5, tempo / 4, glm.vec3(0,1,0))
+        moon5 = glm.translate(moon5, glm.vec3(-20, 5, 5))
+        light_shader.set_mat4("model", moon5)
+        Moon.draw(light_shader)
+
+        moon6 = glm.scale(moon6, glm.vec3(0.1,0.1,0.1))
+        moon6 = glm.rotate(moon6, tempo / 4, glm.vec3(0,1,0))
+        moon6 = glm.translate(moon6, glm.vec3(-22, -3, 3))
+        light_shader.set_mat4("model", moon6)
+        Moon.draw(light_shader)
+
+        moon7 = glm.scale(moon7, glm.vec3(0.1,0.1,0.1))
+        moon7 = glm.rotate(moon7, tempo / 4, glm.vec3(0,1,0))
+        moon7 = glm.translate(moon7, glm.vec3(-28, 2, 2))
+        light_shader.set_mat4("model", moon7)
+        Moon.draw(light_shader)
+
+        moon8 = glm.scale(moon8, glm.vec3(0.1,0.1,0.1))
+        moon8 = glm.rotate(moon8, tempo / 4, glm.vec3(0,1,0))
+        moon8 = glm.translate(moon8, glm.vec3(-30, -1, 1))
+        light_shader.set_mat4("model", moon8)
         Moon.draw(light_shader)
 
         # Saturn

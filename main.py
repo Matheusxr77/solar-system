@@ -282,7 +282,7 @@ def main():
 
         # Uranus
         uranus = glm.mat4(1.0)
-        uranus = glm.scale(uranus, glm.vec3(0,0,0))
+        uranus = glm.translate(uranus, glm.vec3(0,0,0))
         uranus = glm.scale(uranus, glm.vec3(30,30,30))
         uranus = glm.rotate(uranus, tempo/12, glm.vec3(0,1,0))
         uranus = glm.translate(uranus, glm.vec3(0,0,120))

@@ -1,7 +1,11 @@
+# Importando bibliotecas
 from OpenGL.GL import *
 import glm
 
 class Shader:
+    """
+    Classe para gerenciamento de shaders
+    """
     def __init__(self, vertex_path, fragment_path, geometry_path=None):
         # Lê os arquivos dos shaders
         with open(vertex_path, 'r') as file:
@@ -9,6 +13,7 @@ class Shader:
         with open(fragment_path, 'r') as file:
             fragment_code = file.read()
         
+        # Lê o arquivo de geometria, se fornecido
         geometry_code = None
         if geometry_path is not None:
             with open(geometry_path, 'r') as file:
@@ -37,6 +42,8 @@ class Shader:
         self.ID = glCreateProgram()
         glAttachShader(self.ID, vertex_shader)
         glAttachShader(self.ID, fragment_shader)
+
+        # Anexa o shader de geometria, se fornecido
         if geometry_path is not None and geometry_code is not None:
             glAttachShader(self.ID, geometry_shader)
         glLinkProgram(self.ID)
@@ -45,6 +52,8 @@ class Shader:
         # Deleta os shaders, pois já estão linkados no programa
         glDeleteShader(vertex_shader)
         glDeleteShader(fragment_shader)
+        
+        # Deleta o shader de geometria, se fornecido
         if geometry_path is not None and geometry_code is not None:
             glDeleteShader(geometry_shader)
     
@@ -53,39 +62,51 @@ class Shader:
         glUseProgram(self.ID)
     
     def set_bool(self, name, value):
+        """Define um booleano na variável uniforme."""
         glUniform1i(glGetUniformLocation(self.ID, name.encode()), int(value))
     
     def set_int(self, name, value):
+        """Define um inteiro na variável uniforme."""
         glUniform1i(glGetUniformLocation(self.ID, name.encode()), value)
     
     def set_float(self, name, value):
+        """Define um float na variável uniforme."""
         glUniform1f(glGetUniformLocation(self.ID, name.encode()), value)
     
     def set_vec2(self, name, x, y):
+        """Define um vetor 2D na variável uniforme."""
         glUniform2f(glGetUniformLocation(self.ID, name.encode()), x, y)
     
     def set_vec2v(self, name, vec):
+        """Define um vetor 2D na variável uniforme."""
         glUniform2fv(glGetUniformLocation(self.ID, name.encode()), 1, glm.value_ptr(vec))
     
     def set_vec3(self, name, x, y, z):
+        """Define um vetor 3D na variável uniforme."""
         glUniform3f(glGetUniformLocation(self.ID, name.encode()), x, y, z)
     
     def set_vec3v(self, name, vec):
+        """Define um vetor 3D na variável uniforme."""
         glUniform3fv(glGetUniformLocation(self.ID, name.encode()), 1, glm.value_ptr(vec))
     
     def set_vec4(self, name, x, y, z, w):
+        """Define um vetor 4D na variável uniforme."""
         glUniform4f(glGetUniformLocation(self.ID, name.encode()), x, y, z, w)
     
     def set_vec4v(self, name, vec):
+        """Define um vetor 4D na variável uniforme."""
         glUniform4fv(glGetUniformLocation(self.ID, name.encode()), 1, glm.value_ptr(vec))
     
     def set_mat2(self, name, mat):
+        """Define uma matriz 2x2 na variável uniforme."""
         glUniformMatrix2fv(glGetUniformLocation(self.ID, name.encode()), 1, GL_FALSE, glm.value_ptr(mat))
     
     def set_mat3(self, name, mat):
+        """Define uma matriz 3x3 na variável uniforme."""
         glUniformMatrix3fv(glGetUniformLocation(self.ID, name.encode()), 1, GL_FALSE, glm.value_ptr(mat))
     
     def set_mat4(self, name, mat):
+        """Define uma matriz 4x4 na variável uniforme."""
         glUniformMatrix4fv(glGetUniformLocation(self.ID, name.encode()), 1, GL_FALSE, glm.value_ptr(mat))
     
     def check_compile_errors(self, shader, type):

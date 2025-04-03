@@ -1,3 +1,4 @@
+# Importando biliotecas
 import os
 import logging
 import numpy as np
@@ -98,23 +99,28 @@ class Model:
         # Processa vértices
         for i in range(mesh.vertices.shape[0]):
             vertex = {}
+            
             # Posição
             vertex["Position"] = mesh.vertices[i]
+
             # Normais
             if mesh.normals is not None and len(mesh.normals) > i:
                 vertex["Normal"] = mesh.normals[i]
             else:
                 vertex["Normal"] = np.array([0.0, 0.0, 0.0], dtype=np.float32)
+
             # Coordenadas de textura
             if mesh.texturecoords is not None and len(mesh.texturecoords) > 0:
                 vertex["TexCoords"] = [mesh.texturecoords[0][i][0], mesh.texturecoords[0][i][1]]
             else:
                 vertex["TexCoords"] = [0.0, 0.0]
+            
             # Tangentes
             if hasattr(mesh, "tangents") and mesh.tangents is not None and len(mesh.tangents) > i:
                 vertex["Tangent"] = mesh.tangents[i]
             else:
                 vertex["Tangent"] = np.array([0.0, 0.0, 0.0], dtype=np.float32)
+            
             # Bitangentes
             if hasattr(mesh, "bitangents") and mesh.bitangents is not None and len(mesh.bitangents) > i:
                 vertex["Bitangent"] = mesh.bitangents[i]
@@ -196,10 +202,13 @@ class Model:
                         data = prop.data.decode("utf-8")
                     except Exception:
                         continue
-
+                
+                # Verifica se a chave corresponde ao tipo de textura
                 if key == f"$tex.file[{type_name}]":
                     full_path = os.path.join(self.directory, data)
                     already_loaded = next((t for t in self.textures_loaded if t["path"] == full_path), None)
+
+                    # Verifica se a textura ja foi carregada
                     if already_loaded:
                         textures.append(already_loaded)
                     else:
@@ -211,8 +220,11 @@ class Model:
 
         # Fallback: se for diffuse e nenhuma textura for encontrada, tenta carregar um arquivo padrão
         if type_name == "diffuse" and len(textures) == 0:
+            # Tenta carregar uma textura padrão do diretório do modelo
             basename = os.path.basename(self.directory)
             fallback_path = os.path.join(self.directory, f"{basename}_texture.png")
+
+            # Verifica se o arquivo de fallback existe
             if os.path.isfile(fallback_path):
                 texture_id = load_texture(fallback_path)
                 logging.info("Fallback texture loaded: %s (ID: %s)", fallback_path, texture_id)

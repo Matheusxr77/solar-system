@@ -1,7 +1,9 @@
+# Importando bibliotecas
 import numpy as np
-from OpenGL.GL import *
 import ctypes
+from OpenGL.GL import *
 
+# Define a estrutura de cada vértice da malha
 vertex_dtype = np.dtype([
     ('Position', np.float32, 3),
     ('Normal', np.float32, 3),
@@ -77,6 +79,7 @@ class Mesh:
             glEnableVertexAttribArray(6)
             glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, stride, ctypes.c_void_p(offset))
 
+        # Desvincula o VAO e os buffers
         glBindVertexArray(0)
 
     def draw(self, shader):
@@ -94,6 +97,8 @@ class Mesh:
         for i, tex in enumerate(self.textures):
             glActiveTexture(GL_TEXTURE0 + i)
             name = tex['type']
+
+            # Define o número da textura baseado no tipo
             if name == "texture_diffuse":
                 number = str(diffuse_nr)
                 diffuse_nr += 1
@@ -108,12 +113,16 @@ class Mesh:
                 height_nr += 1
             else:
                 number = ""
+
             # Forma o nome do uniform, por exemplo, "texture_diffuse1"
             uniform_name = (name + number).encode('utf-8')
             glUniform1i(glGetUniformLocation(shader.ID, uniform_name), i)
             glBindTexture(GL_TEXTURE_2D, tex['id'])
 
+        # Renderiza os triângulos
         glBindVertexArray(self.VAO)
         glDrawElements(GL_TRIANGLES, len(self.indices), GL_UNSIGNED_INT, None)
         glBindVertexArray(0)
+
+        # Reseta o slot de textura ativa
         glActiveTexture(GL_TEXTURE0)

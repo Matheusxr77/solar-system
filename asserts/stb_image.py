@@ -1,9 +1,4 @@
-# stb_image.py
-# ----------------------------------------------------------------------------
-# Simula as funções de carregamento de imagem do stb_image.h em Python,
-# usando Pillow (PIL) para ler arquivos de imagem.
-# ----------------------------------------------------------------------------
-
+# Importando bibliotecas
 from PIL import Image
 import numpy as np
 import io

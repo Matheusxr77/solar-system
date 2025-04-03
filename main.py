@@ -1,4 +1,4 @@
-# main.py
+# Importando bibliotecas
 import glfw
 from OpenGL.GL import *
 import glm
@@ -22,11 +22,18 @@ tempo_ultimo_frame = 0.0
 tempo = 0.0
 
 def framebuffer_size_callback(window, width, height):
-    # Quando a janela é redimensionada, atualizamos a viewport do OpenGL
+    """
+    Classe para quando a janela é redimensionada, atualizar a viewport do OpenGL
+    """
     glViewport(0, 0, width, height)
 
 def mouse_callback(window, xpos, ypos):
+    """
+    Classe que processa o movimento do mouse.
+    """
     global ultimo_x, ultimo_y, first_mouse
+
+    # Verifica se o mouse foi movido
     if first_mouse:
         ultimo_x = xpos
         ultimo_y = ypos
@@ -37,12 +44,19 @@ def mouse_callback(window, xpos, ypos):
     ultimo_x = xpos
     ultimo_y = ypos
 
+    # Processa o movimento do mouse
     camera.process_mouse_movement(xoffset, yoffset)
 
 def scroll_callback(window, xoffset, yoffset):
+    """
+    Classe que processa o scroll do mouse.
+    """
     camera.process_mouse_scroll(yoffset)
 
 def process_input(window):
+    """
+    Classe que processa as entradas do teclado
+    """
     global intervalo_entre_frames
 
     # Verifica se Shift está pressionado
@@ -113,6 +127,7 @@ def main():
     Uranus   = Model("asserts/models/Uranus/Uranus.obj")
     Neptune  = Model("asserts/models/Neptune/Neptune.obj")
 
+    # Background
     Stars    = Model("asserts/models/Stars/Stars.obj")
     Orbita   = Model("asserts/models/Line/Line.obj")
     Orbita2  = Model("asserts/models/Line2/Line2.obj")
@@ -317,7 +332,7 @@ def main():
         cor_shader.use()
         cor_shader.set_mat4("projection", projecao)
         cor_shader.set_mat4("view", visualizacao)
-
+        
         orbitaMercurio = glm.mat4(1.0)
         orbitaMercurio = glm.translate(orbitaMercurio, glm.vec3(0,0,0))
         orbitaMercurio = glm.scale(orbitaMercurio, glm.vec3(180,180,180))
@@ -366,10 +381,13 @@ def main():
         cor_shader.set_mat4("model", orbitaNetuno)
         Orbita.draw(cor_shader)
 
+        # Limpa a tela e troca os buffers
         glfw.swap_buffers(window)
         glfw.poll_events()
 
+    # Pede para a GLFW destruir a janela
     glfw.terminate()
 
+# Chama a função principal
 if __name__ == "__main__":
     main()

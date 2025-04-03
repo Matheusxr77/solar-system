@@ -1,3 +1,4 @@
+# Importando bibliotecas
 import glm
 from enum import Enum
 
@@ -101,5 +102,8 @@ class Camera:
         self.Up = glm.normalize(glm.cross(self.Right, self.Front))
     
     def __repr__(self):
+        """
+        Retorna uma representação textual da câmera, útil para debugging.
+        """
         return (f"Camera(Position={self.Position}, Front={self.Front}, Up={self.Up}, "
                 f"Yaw={self.Yaw}, Pitch={self.Pitch}, Zoom={self.Zoom})")

@@ -103,10 +103,10 @@ def main():
     Uranus   = Model("asserts/models/Uranus/Uranus.obj")
     Neptune  = Model("asserts/models/Neptune/Neptune.obj")
 
-    Background = Model("asserts/models/Background/Background.obj")
-    Orbita     = Model("asserts/models/Line/Line.obj")
-    Orbita2    = Model("asserts/models/Line2/Line2.obj")
-    Orbita3    = Model("asserts/models/Line3/Line3.obj")
+    Stars    = Model("asserts/models/Stars/Stars.obj")
+    Orbita   = Model("asserts/models/Line/Line.obj")
+    Orbita2  = Model("asserts/models/Line2/Line2.obj")
+    Orbita3  = Model("asserts/models/Line3/Line3.obj")
 
     # Loop principal
     while not glfw.window_should_close(window):
@@ -137,7 +137,7 @@ def main():
         background_mat = glm.translate(background_mat, glm.vec3(0.0, 0.0, 0.0))
         background_mat = glm.scale(background_mat, glm.vec3(4000, 4000, 4000))
         planetas_shader.set_mat4("model", background_mat)
-        Background.draw(planetas_shader)
+        Stars.draw(planetas_shader)
 
         # Sol
         sun_mat = glm.mat4(1.0)

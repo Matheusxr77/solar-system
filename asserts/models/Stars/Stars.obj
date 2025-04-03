@@ -1,6 +1,6 @@
 # Blender v2.76 (sub 0) OBJ File: 'Stars.blend'
 # www.blender.org
-mtllib Background.mtl
+mtllib Stars.mtl
 o Stars
 v 0.000001 -0.177742 -2.451570
 v -0.348900 -0.177742 -2.426660

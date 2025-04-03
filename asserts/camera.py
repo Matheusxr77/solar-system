@@ -11,7 +11,7 @@ class CameraMovement(Enum):
 # Constantes padrão
 YAW = -195.1
 PITCH = -22.9
-SPEED = 2.5
+SPEED = 300
 SENSITIVITY = 0.1
 ZOOM = 45.0
 

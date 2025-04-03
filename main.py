@@ -5,6 +5,7 @@ import glm
 from asserts.camera import Camera
 from asserts.shader import Shader
 from asserts.model import Model
+from asserts.camera import CameraMovement
 
 # Configurações da tela
 WIDTH, HEIGHT = 1200, 800
@@ -43,17 +44,26 @@ def scroll_callback(window, xoffset, yoffset):
 
 def process_input(window):
     global intervalo_entre_frames
+
+    # Verifica se Shift está pressionado
+    multiplier = 1.0
+    if (glfw.get_key(window, glfw.KEY_LEFT_SHIFT) == glfw.PRESS or
+        glfw.get_key(window, glfw.KEY_RIGHT_SHIFT) == glfw.PRESS):
+        multiplier = 5.0  # Fator de velocidade extra
+
     if glfw.get_key(window, glfw.KEY_ESCAPE) == glfw.PRESS:
         glfw.set_window_should_close(window, True)
 
+    # Movimentação WASD
     if glfw.get_key(window, glfw.KEY_W) == glfw.PRESS:
-        camera.process_keyboard("FORWARD", intervalo_entre_frames)
+        camera.process_keyboard(CameraMovement.FORWARD, intervalo_entre_frames * multiplier)
     if glfw.get_key(window, glfw.KEY_S) == glfw.PRESS:
-        camera.process_keyboard("BACKWARD", intervalo_entre_frames)
+        camera.process_keyboard(CameraMovement.BACKWARD, intervalo_entre_frames * multiplier)
     if glfw.get_key(window, glfw.KEY_A) == glfw.PRESS:
-        camera.process_keyboard("LEFT", intervalo_entre_frames)
+        camera.process_keyboard(CameraMovement.LEFT, intervalo_entre_frames * multiplier)
     if glfw.get_key(window, glfw.KEY_D) == glfw.PRESS:
-        camera.process_keyboard("RIGHT", intervalo_entre_frames)
+        camera.process_keyboard(CameraMovement.RIGHT, intervalo_entre_frames * multiplier)
+    
 
 def main():
     global tempo_ultimo_frame, intervalo_entre_frames, tempo
